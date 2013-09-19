@@ -31,14 +31,39 @@ Contains work from :
 
 
 // TYPOGRAPHY & TEXT ===========================================
-@font-family-sans-serif:  	"Helvetica Neue", Helvetica, Arial, sans-serif;
-@font-family-serif:       	Georgia, "Times New Roman", Times, serif;
-@font-family-monospace:   	Monaco, Menlo, Consolas, "Courier New", monospace;
 @font-size-browser-default: 16;
 
-// put headings into ems
+// FONTS : 
+// SANS SERIF (no curvy tails on letters) : default (and generic)
+@font-family-sans-serif:  		"Helvetica Neue", Helvetica, Arial, sans-serif;
+// specific sans serif 
+@font-family-arial: 			Arial, "Helvetica Neue", Helvetica, sans-serif;
+@font-family-arial-black: 		"Arial Black", "Arial Bold", Gadget, sans-serif;
 
-// all other elements as rems...
+@font-family-arial-narrow: 		"Arial Narrow", Arial, sans-serif;
+@font-family-arial-rounded: 	"Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+
+
+// SERIF (ligatures and accents in the newspaper stlye) : default (& generic)
+@font-family-serif:       		Georgia, "Times New Roman", Times, serif;
+
+// MONOSPACE
+@font-family-monospace:   		Monaco, Menlo, Consolas, "Courier New", monospace;
+
+.font-family( @family ){
+	font-family:@family;
+}
+
+.font-family-sans(){
+	.font-family( @font-family-sans-serif );
+}
+.font-family-serif(){
+	.font-family( @font-family-serif );
+}
+.font-family-monospace(){
+	.font-family( @font-family-monospace );
+}
+
 
 // initial variables set-up
 @line-height:24;
@@ -46,7 +71,8 @@ Contains work from :
 // mixin
 
 // full-fat vertical rhythm
-.font-size-baseline ( @size ) {
+.font-size-baseline ( @size; @emsOrRems ) {
+	// TODO : Conditional REM or EMs
 	.font-size-rem( @size );
 	margin-bottom: 0px + @line-height;
 	margin-bottom: 0rem + (@line-height / @font-size-browser-default);
@@ -76,9 +102,11 @@ Contains work from :
 	.font-size-baseline( @size );
 }
 
+
 // set-up the body font-size / line-height
-.body() {
-	margin-top: 0px + @line-height;
+.setup-global-type() {
+	//margin-top: 0px + @line-height;
+	line-height: 0 + round(@line-height / @font-size-browser-default*10000) / 10000;
 	font-size: 0px + @font-size-browser-default;	
 }
 
@@ -182,6 +210,8 @@ Contains work from :
 .margins-lr( @margin:auto ){	.margins-lr( @margin ); }
 
 
+// GRID ==============================================================================
+
 // Defaults which you can freely override
 @column-width: 60;
 @gutter-width: 20;
@@ -217,7 +247,7 @@ body {
 	// *width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width)-@correction;
 	// *margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width)-@correction;
 }
-.push( @offset:1 ) {  margin-left: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
+.push( @offset:1 ) {  	margin-left: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
 .pull( @offset:1 ) {	margin-right: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
 
 // Center-align a block level element
@@ -251,7 +281,11 @@ body {
 	-moz-background-size: @arguments;
 	background-size: @arguments;
 }
-
+.background-clip( @clip:padding-box ) {
+  -moz-background-clip: @clip;
+  -webkit-background-clip: @clip;
+  background-clip: @clip;
+}
 // Image replacement.
 .ir () {border: 0; overflow: hidden; background-color: transparent; *text-indent: -9999px; &:before {content: ""; display: block; width: 0; height: 100%;}}
 
