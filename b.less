@@ -1,0 +1,307 @@
+/*
+
+A collection of useful mixins that are very useful when
+architecturing sites. 
+
+Simply add as a class mixin to your own selectors.
+
+Contains work from : 
+
+* html5BoilerPlate - 
+* 3L.Less - http://mateuszkocz.github.io/3l/
+* Preboot - https://github.com/mdo/preboot
+* Normalize - 
+* Reset - 
+
+*/
+
+
+// RESET & NORMALISE ===========================================
+
+// Normalise
+.normalize(){article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,video{display:inline-block}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}mark{background:#ff0;color:#000}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}pre{white-space:pre-wrap}q{quotes:"\201C" "\201D" "\2018" "\2019"}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}button,input{line-height:normal}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}}
+
+// Reset 
+.reset() {html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}}
+
+
+
+
+
+
+
+// TYPOGRAPHY & TEXT ===========================================
+@font-family-sans-serif:  	"Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:       	Georgia, "Times New Roman", Times, serif;
+@font-family-monospace:   	Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-size-browser-default: 16;
+
+// put headings into ems
+
+// all other elements as rems...
+
+// initial variables set-up
+@line-height:24;
+
+// mixin
+
+// full-fat vertical rhythm
+.font-size-baseline ( @size ) {
+	.font-size-rem( @size );
+	margin-bottom: 0px + @line-height;
+	margin-bottom: 0rem + (@line-height / @font-size-browser-default);
+}
+
+// as REMs
+.font-size-rem ( @size ) {
+	font-size: 0px + @size;
+	font-size: 0rem + @size / @font-size-browser-default;
+}
+// as EMs
+.font-size-em ( @size ) {
+	font-size: 0px + @size;
+	font-size: 0rem + @size / @font-size-browser-default;
+}
+
+
+// TODO : See if @size > @line-height and if so force margins
+// just font-size and line-height
+.font-size ( @size ) {
+	.font-size-rem( @size );
+	line-height: 0 + round(@line-height / @size*10000) / 10000;
+}
+
+// the whole shebang
+.font-size ( @size; @emsOrRems ) {
+	.font-size-baseline( @size );
+}
+
+// set-up the body font-size / line-height
+.body() {
+	margin-top: 0px + @line-height;
+	font-size: 0px + @font-size-browser-default;	
+}
+
+
+// shortcuts to some common text styles...
+.bold (){		font-weight: bold; }
+.italic() {		font-style: italic; }
+.uppercase() {	text-transform: uppercase; }
+.lowercase() {	text-transform: lowercase; }
+.justify() {	text-align: justify; }
+
+// make text invisible yet selectable
+.text-hide() {	font: ~"0/0" a;	color: transparent;	text-shadow: none;	background-color: transparent;	border: 0; }
+
+// Truncate : trun...
+// Requires inline-block or block for proper styling
+// * Requires element to be block or inline-block level *
+.text-truncate() {  overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;	}
+
+
+// Hyphenation : (extra) hyphen-ation 
+.hyphens( @mode: auto ) {
+  word-wrap: break-word;
+  -webkit-hyphens: @mode;
+     -moz-hyphens: @mode;
+      -ms-hyphens: @mode;
+       -o-hyphens: @mode;
+          hyphens: @mode;
+}
+
+
+// When clicked and dragged over text, what colours should the rectangle and text be?
+.selection( @text-color ; @background-color ) {
+	&::-moz-selection {color: @text-color; background-color: @background-color;}
+	&::selection {color: @text-color; background-color: @background-color;}
+}
+
+// Placeholder text
+// Set the placeholder text color for inputs
+.placeholder(@color: @input-color-placeholder) {
+  &:-moz-placeholder            { color: @color; } // Firefox 4-18
+  &::-moz-placeholder           { color: @color; } // Firefox 19+
+  &:-ms-input-placeholder       { color: @color; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
+}
+
+
+
+
+
+
+
+// LAYOUT =======================================================
+
+
+
+// Sizing shortcuts
+.size(@width ; @height) {  width:@width;  height:@height; }
+// Square sizing (takes only one argument)
+.size(@size) {  .size(@size, @size);	}
+
+// Responsive images
+.responsive(){	max-width: 100%; 	height: auto; }
+
+// Absolute positioning 
+.position( @top:auto; @left:auto; @bottom:auto; @right:auto )
+{
+	position:absolute;
+	top:@top;
+	left:@left;
+	bottom:@bottom;
+	right:@right;
+}
+
+// Position relative to the top left of the parent container
+.position-tl( @top:auto; @left:auto ){	position:absolute;	top:@top;	left:@left; }
+.position-tl( @position:auto ){	.position-tl( @position, @position ); }
+
+// Position relative to the bottom and right of the parent container
+.position-br( @bottom:auto; @right:auto ){	position:absolute;	bottom:@bottom;	right:@right; }
+.position-br( @position:auto ){	.position-br( @position, @position ); }
+
+
+// Margins for asymetrical layouts
+.margins( @top:auto; @right:auto; @bottom:auto; @left:auto ){	
+	margin-top:@top;
+	margin-bottom:@bottom;
+	margin-left:@left;
+	margin-right:@right;
+}
+// Margins for symetrical layouts
+// top = bottom, right = left
+.margins( @top:auto; @left:auto ){	margin:@top @left; }
+// all 4 margins equal!
+.margins( @margin:auto ){	margin:@margin; }
+
+.margins-tb( @top:auto; @bottom:auto ){	margin-top:@top;	margin-bottom:@bottom; }
+.margins-tb( @margin:auto){	.margins-tb( @margin, @margin ); }
+
+.margins-lr( @left:auto, @right:auto ){	margin-left:@left;	margin-right:@right; }
+.margins-lr( @margin:auto ){	.margins-lr( @margin ); }
+
+
+// Defaults which you can freely override
+@column-width: 60;
+@gutter-width: 20;
+@columns: 12;
+
+// Utility variable — you should never need to modify this
+@gridsystem-width: (@column-width*@columns) + (@gutter-width*@columns) * 1px;
+
+// Set @total-width to 100% for a fluid layout
+@total-width: @gridsystem-width;
+@total-width: 100%;
+
+body {
+	width: 100%;
+	.clearfix;
+}
+
+.row( @columns:@columns ) {
+	display: block;
+	width: @total-width*((@gutter-width + @gridsystem-width)/@gridsystem-width);
+	margin: 0 @total-width*(((@gutter-width*.5)/@gridsystem-width)*-1);
+	// *width: @total-width*((@gutter-width + @gridsystem-width)/@gridsystem-width)-@correction;
+	// *margin: 0 @total-width*(((@gutter-width*.5)/@gridsystem-width)*-1)-@correction;
+	.clearfix;
+}
+.column( @x,@columns:@columns ) {
+	display: inline;
+	float: left;
+	width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width);
+	margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width);
+	// Prevent columns from collapsing when empty
+	min-height: 1px;
+	// *width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width)-@correction;
+	// *margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width)-@correction;
+}
+.push( @offset:1 ) {  margin-left: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
+.pull( @offset:1 ) {	margin-right: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
+
+// Center-align a block level element
+.centralize() {  display: block; .margins-lr( auto ); }
+
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+.hidden () { display: none !important; visibility: hidden;}
+
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden () { border: 0;clip: rect(0 0 0 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}
+	
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+// CAUTION! The .visuallyhidden class is included! If you want your object to be both
+// .visuallyhidden and .focusabe use only .focusable class.
+.focusable () { .visuallyhidden;&:active,&:focus{clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;}}
+
+
+// Hide visually and from screenreaders, but maintain layout.
+.invisible () {visibility: hidden;}
+
+
+// Contain floats: h5bp.com/q
+.clearfix () { *zoom:1;&:before,&:after{content:" ";display:table;}&:after{clear:both;}}
+
+
+// IMAGES =======================================================
+.background-size (...) {
+	-moz-background-size: @arguments;
+	background-size: @arguments;
+}
+
+// Image replacement.
+.ir () {border: 0; overflow: hidden; background-color: transparent; *text-indent: -9999px; &:before {content: ""; display: block; width: 0; height: 100%;}}
+
+
+
+
+
+// UTILS ========================================================
+.button() {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: baseline;
+    text-align: center;
+    cursor: pointer;
+	
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	   
+	font-size: 100%;
+    *font-size: 90%;
+    *overflow: visible;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+	
+	&::-moz-focus-inner {
+		padding: 0;
+		border: 0
+	}
+	
+	&:hover{
+		text-decoration: none;
+	}
+	
+	&:focus{
+		text-decoration: none;
+		outline: 0
+	}
+	
+	&:active{
+		
+	}
+}
+
+.disabled() {
+    border: 0;
+    cursor: not-allowed;
+}
