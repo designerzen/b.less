@@ -1,121 +1,191 @@
 /*
 
 A collection of useful mixins that are very useful when
-architecturing sites. 
+architecturing sites and creating complex layouts. 
 
 Simply add as a class mixin to your own selectors.
 
 Contains work from : 
 
 * html5BoilerPlate - 
-* 3L.Less - http://mateuszkocz.github.io/3l/
-* Preboot - https://github.com/mdo/preboot
+* 3L.Less 	- mateuszkocz.github.io/3l
+* Preboot 	- github.com/mdo/preboot
 * Normalize - 
-* Reset - 
+* Reset 	- 
+* Clearfix 	- 
+* Pure CSS 	- pure.io
+
+As well as input from : 
+* Denis Leblanc - denisleblanc.com/
 
 */
 
-
 // RESET & NORMALISE ===========================================
-
-// Normalise
 .normalize(){article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,video{display:inline-block}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}mark{background:#ff0;color:#000}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}pre{white-space:pre-wrap}q{quotes:"\201C" "\201D" "\2018" "\2019"}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}button,input{line-height:normal}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}}
-
-// Reset 
 .reset() {html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}}
 
 
 
-
-
-
-
 // TYPOGRAPHY & TEXT ===========================================
-@font-size-browser-default: 16;
-
-// FONTS : 
-// SANS SERIF (no curvy tails on letters) : default (and generic)
-@font-family-sans-serif:  		"Helvetica Neue", Helvetica, Arial, sans-serif;
-// specific sans serif 
-@font-family-arial: 			Arial, "Helvetica Neue", Helvetica, sans-serif;
-@font-family-arial-black: 		"Arial Black", "Arial Bold", Gadget, sans-serif;
-
-@font-family-arial-narrow: 		"Arial Narrow", Arial, sans-serif;
-@font-family-arial-rounded: 	"Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
-
-
-// SERIF (ligatures and accents in the newspaper stlye) : default (& generic)
-@font-family-serif:       		Georgia, "Times New Roman", Times, serif;
-
-// MONOSPACE
-@font-family-monospace:   		Monaco, Menlo, Consolas, "Courier New", monospace;
-
-.font-family( @family ){
-	font-family:@family;
-}
-
-.font-family-sans(){
-	.font-family( @font-family-sans-serif );
-}
-.font-family-serif(){
-	.font-family( @font-family-serif );
-}
-.font-family-monospace(){
-	.font-family( @font-family-monospace );
-}
-
 
 // initial variables set-up
-@line-height:24;
+@font-size-browser-default: 16;
+// You can override the line height :
+@line-height: 24;
 
-// mixin
 
-// full-fat vertical rhythm
-.font-size-baseline ( @size; @emsOrRems ) {
-	// TODO : Conditional REM or EMs
-	.font-size-rem( @size );
-	margin-bottom: 0px + @line-height;
-	margin-bottom: 0rem + (@line-height / @font-size-browser-default);
+// FONTS -------------------------------------------------------
+// Some of the fonts, like: Garamond, Baskerville and Didot are not as readable on screen as Georgia. 
+
+// Due to smaller x-height; Caslon, Didot, Garamond, Baskerville and Hoefler Text should be set 
+// at *minimum* of 14 pixels or above.
+// Lucida Grande, Futura and Tahoma are mechanically obliqued to fake an italic.
+// Geneva, Baskerville Old Face and Big Caslon has no bold and italic. They are faked to bold and italic.
+// Avoid using Helvetica or Helvetica Neue for body text, _especially below 14px_.
+// Futura, Gill Sans and Franklin Gothic Medium should be carefully stacked and used because of their unusual weight.
+// For more info goto : http://www.awayback.com/revised-font-stack/
+
+// SANS SERIF (no curvy tails on letters) : ---------------------------------------------------------------------------
+
+// Sans-serif specific font-stacks
+@font-family-arial: 				Arial, "Helvetica Neue", Helvetica, sans-serif;
+@font-family-arial-black: 			"Arial Black", "Arial Bold", Gadget, sans-serif;
+@font-family-arial-narrow: 			"Arial Narrow", Arial, sans-serif;
+@font-family-arial-rounded: 		"Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+@font-family-avant-garde: 			"Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+@font-family-calibri: 				Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+@font-family-candara: 				Candara, Calibri, Segoe, "Segoe UI", Optima, Arial, sans-serif;
+@font-family-futura: 				Futura, "Trebuchet MS", Arial, sans-serif;
+@font-family-franklin-gothic: 		"Franklin Gothic Medium", Arial, sans-serif;
+@font-family-geneva: 				Geneva, Tahoma, Verdana, sans-serif;
+@font-family-gill-sans: 			"Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+// NB. Avoid using Helvetica or Helvetica Neue for body text, especially below 14px
+@font-family-helvetica: 			"Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-lucida-grande: 		"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+@font-family-optima: 				Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif;
+@font-family-segoe: 				Segoe, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+@font-family-tahoma: 				Tahoma, Geneva, Verdana, sans-serif;
+@font-family-trebuchet: 			"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+@font-family-verdana: 				Verdana, Geneva, sans-serif;
+    
+@font-family-default-sans-serif:  	@font-family-helvetica;
+
+
+// SERIF (ligatures and accents in the newspaper stlye) : -------------------------------------------------------------
+
+// Serif specific font-stacks
+// Huge x-height!
+@font-family-baskerville: 			Baskerville, "Baskerville old face", "Hoefler Text", Garamond, "Times New Roman", serif;
+@font-family-bodoni: 				"Bodoni MT", Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+@font-family-book-antiqua: 			"Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+@font-family-caslon: 				"Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
+@font-family-cambria: 				Cambria, Georgia, serif;
+@font-family-constantia: 			Constantia, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+@font-family-didot: 				Didot, "Didot LT STD", "Hoefler Text", Garamond, "Times New Roman", serif;
+@font-family-georgia: 				Georgia, "Times New Roman", Times, serif;
+@font-family-garamond: 				Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", serif;
+@font-family-goudy: 				"Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+@font-family-hoefler: 				"Hoefler Text", "Baskerville old face", Garamond, "Times New Roman", serif;
+@font-family-lucida-bright: 		"Lucida Bright", Georgia, serif;
+@font-family-palatino: 				Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+
+@font-family-default-serif:       	@font-family-georgia;
+
+
+// MONOSPACE ----------------------------------------------------------------------------------------------------------
+@font-family-default-monospace:   	Monaco, Menlo, Consolas, "Courier New", monospace;
+
+
+
+// Shortcuts for defining stacks, families and fallbacks
+// A nice way to use a stack as the fallback to your web font...
+.font-family( @family; @fallback ){
+	// combine the two families together!
+	font-family: ~"@{family},@{fallback}";
+    //font-family: @family;
 }
 
-// as REMs
+.font-family( @family ){	font-family:@family; }
+
+
+// Set any element to use the default sans or serif
+// NB. You can overide the @font-family-sans-serif with your
+// own stack if you want to use these as universal setters
+.font-family-sans( ){				.font-family( @font-family-default-sans-serif );	}
+.font-family-sans( @family ){		.font-family( @family, @font-family-default-sans-serif );	}
+.sans( @family ){					.font-family-sans( @family );	}
+.sans(){    				        .font-family-sans();	}
+
+.font-family-serif(){				.font-family( @font-family-default-serif ); }
+.font-family-serif( @family ){		.font-family( @family, @font-family-default-serif ); }
+.serif( @family ){     				.font-family-serif( @family  ); }
+.serif(){     			        	.font-family-serif(); }
+
+.font-family-monospace( ){			.font-family( @font-family-default-monospace ); }
+.font-family-monospace( @family ){	.font-family( @family, @font-family-default-monospace ); }
+.monospace ( @family ){				.font-family-monospace( @family ); }
+.monospace (){    			        .font-family-monospace( ); }
+
+
+// Font Sizing with Rhymnic baseline
+
+// set-up the body font-size / line-height
+.setup-global-type( @line-height:@line-height) {
+    //margin-top: 0px + @line-height;
+	line-height: 0 + round(@line-height / @font-size-browser-default*10000) / 10000;
+	font-size: 0px + @font-size-browser-default;	
+}
+
+// font-size : Just as Pixels
+.font-size-px ( @size:0 ) {
+    font-size: 0px + @size;
+}
+
+// font-size : as REMs
+// NB. REMS are just like EMS except that they do not next styles
+// and therefore stay relative always to the root rather than their immediate parent
 .font-size-rem ( @size ) {
-	font-size: 0px + @size;
+    .font-size-px( @size );     // pixel fallback
 	font-size: 0rem + @size / @font-size-browser-default;
 }
-// as EMs
+
+// font-size : as EMs
+// NB. You probably want to keep your headers and paragraphs cascading
+// so it is wise to use EMs for h1,h2,h3,h4,h5,h6,p...
 .font-size-em ( @size ) {
-	font-size: 0px + @size;
-	font-size: 0rem + @size / @font-size-browser-default;
+    .font-size-px( @size );     // pixel fallback
+	font-size: 0em + @size / @font-size-browser-default;
 }
 
 
 // TODO : See if @size > @line-height and if so force margins
-// just font-size and line-height
+// font-size : just font-size and line-height
 .font-size ( @size ) {
 	.font-size-rem( @size );
 	line-height: 0 + round(@line-height / @size*10000) / 10000;
 }
 
-// the whole shebang
+// font-size : sticking on vertical rhythm
+.font-size-rhythm ( @size; @emsOrRems ) {
+    .font-size( @size, @emsOrRems );
+}
+
+// font-size : rythmic baseline respecting font-size
 .font-size ( @size; @emsOrRems ) {
-	.font-size-baseline( @size );
+    // TODO : Conditional REM or EMs
+    .font-size( @size );
+	.margin-baseline();
 }
 
-
-// set-up the body font-size / line-height
-.setup-global-type() {
-	//margin-top: 0px + @line-height;
-	line-height: 0 + round(@line-height / @font-size-browser-default*10000) / 10000;
-	font-size: 0px + @font-size-browser-default;	
-}
 
 
 // shortcuts to some common text styles...
 .bold (){		font-weight: bold; }
 .italic() {		font-style: italic; }
+
 .uppercase() {	text-transform: uppercase; }
 .lowercase() {	text-transform: lowercase; }
+
 .justify() {	text-align: justify; }
 
 // make text invisible yet selectable
@@ -126,6 +196,8 @@ Contains work from :
 // * Requires element to be block or inline-block level *
 .text-truncate() {  overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;	}
 
+// User can select?
+.user-select( @select:none ){    -webkit-user-select:@select;    -moz-user-select:@select;    -ms-user-select:@select;    user-select:@select; }
 
 // Hyphenation : (extra) hyphen-ation 
 .hyphens( @mode: auto ) {
@@ -155,14 +227,9 @@ Contains work from :
 
 
 
-
-
-
-
 // LAYOUT =======================================================
 
-
-
+// SIZING -------------------------------------------------------
 // Sizing shortcuts
 .size(@width ; @height) {  width:@width;  height:@height; }
 // Square sizing (takes only one argument)
@@ -170,6 +237,9 @@ Contains work from :
 
 // Responsive images
 .responsive(){	max-width: 100%; 	height: auto; }
+
+
+// POSITIONING --------------------------------------------------
 
 // Absolute positioning 
 .position( @top:auto; @left:auto; @bottom:auto; @right:auto )
@@ -182,6 +252,7 @@ Contains work from :
 }
 
 // Position relative to the top left of the parent container
+.position( @top:auto; @left:auto ){ .position-tl( @top, @left ); }
 .position-tl( @top:auto; @left:auto ){	position:absolute;	top:@top;	left:@left; }
 .position-tl( @position:auto ){	.position-tl( @position, @position ); }
 
@@ -189,29 +260,61 @@ Contains work from :
 .position-br( @bottom:auto; @right:auto ){	position:absolute;	bottom:@bottom;	right:@right; }
 .position-br( @position:auto ){	.position-br( @position, @position ); }
 
+// Center-align a block level element
+.centralize() {  display: block; .margins-lr( auto ); }
 
-// Margins for asymetrical layouts
+
+// PADDING & MARGINS --------------------------------------------
+// Margins for asymetrical layouts - Individualised
+// NB. Useful for setting groups then overrriding individually
 .margins( @top:auto; @right:auto; @bottom:auto; @left:auto ){	
 	margin-top:@top;
 	margin-bottom:@bottom;
 	margin-left:@left;
 	margin-right:@right;
 }
+
 // Margins for symetrical layouts
-// top = bottom, right = left
+// Margins : top = bottom, right = left
 .margins( @top:auto; @left:auto ){	margin:@top @left; }
-// all 4 margins equal!
+// Margins : All 4 margins equal!
 .margins( @margin:auto ){	margin:@margin; }
 
+// Margins Top & Bottom ONLY
 .margins-tb( @top:auto; @bottom:auto ){	margin-top:@top;	margin-bottom:@bottom; }
 .margins-tb( @margin:auto){	.margins-tb( @margin, @margin ); }
-
+// Margins Left & Right ONLY
 .margins-lr( @left:auto, @right:auto ){	margin-left:@left;	margin-right:@right; }
 .margins-lr( @margin:auto ){	.margins-lr( @margin ); }
 
+.margin-baseline(){
+    margin-bottom: 0px + @line-height;  // pixel fallback
+    margin-bottom: 0rem + (@line-height / @font-size-browser-default);
+}
+
+// ACCESSIBILITY ----------------------------------------------
+
+// Hide from both screenreaders and browsers: h5bp.com/u
+.hidden () { display: none !important; visibility: hidden;}
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v
+.visuallyhidden () { border: 0;clip: rect(0 0 0 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}
+	
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
+// CAUTION! The .visuallyhidden class is included! If you want your object to be both
+// .visuallyhidden and .focusabe use only .focusable class.
+.focusable () { .visuallyhidden;&:active,&:focus{clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;}}
+
+// Hide visually and from screenreaders, but maintain layout.
+.invisible () { visibility: hidden; }
+
+// Contain floats: h5bp.com/q
+.clearfix () { *zoom:1;&:before,&:after{content:" ";display:table;}&:after{clear:both;} }
+
+
 
 // GRID ==============================================================================
-
+/*
 // Defaults which you can freely override
 @column-width: 60;
 @gutter-width: 20;
@@ -224,7 +327,7 @@ Contains work from :
 @total-width: @gridsystem-width;
 @total-width: 100%;
 
-body {
+body() {
 	width: 100%;
 	.clearfix;
 }
@@ -247,48 +350,21 @@ body {
 	// *width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width)-@correction;
 	// *margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width)-@correction;
 }
+
 .push( @offset:1 ) {  	margin-left: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
 .pull( @offset:1 ) {	margin-right: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
-
-// Center-align a block level element
-.centralize() {  display: block; .margins-lr( auto ); }
-
-
-// Hide from both screenreaders and browsers: h5bp.com/u
-.hidden () { display: none !important; visibility: hidden;}
-
-
-// Hide only visually, but have it available for screenreaders: h5bp.com/v
-.visuallyhidden () { border: 0;clip: rect(0 0 0 0);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}
-	
-
-// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p
-// CAUTION! The .visuallyhidden class is included! If you want your object to be both
-// .visuallyhidden and .focusabe use only .focusable class.
-.focusable () { .visuallyhidden;&:active,&:focus{clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto;}}
-
-
-// Hide visually and from screenreaders, but maintain layout.
-.invisible () {visibility: hidden;}
-
-
-// Contain floats: h5bp.com/q
-.clearfix () { *zoom:1;&:before,&:after{content:" ";display:table;}&:after{clear:both;}}
+*/
 
 
 // IMAGES =======================================================
-.background-size (...) {
-	-moz-background-size: @arguments;
-	background-size: @arguments;
-}
-.background-clip( @clip:padding-box ) {
-  -moz-background-clip: @clip;
-  -webkit-background-clip: @clip;
-  background-clip: @clip;
-}
+// Polyfiller for mozilla: use until redundant
+.background-size (...) {	-moz-background-size: @arguments;	background-size: @arguments; }
+
+// Clip an image into a frame
+.background-clip( @clip:padding-box ) {  -moz-background-clip: @clip;  -webkit-background-clip: @clip;  background-clip: @clip; }
+
 // Image replacement.
 .ir () {border: 0; overflow: hidden; background-color: transparent; *text-indent: -9999px; &:before {content: ""; display: block; width: 0; height: 100%;}}
-
 
 
 
@@ -305,17 +381,16 @@ body {
     cursor: pointer;
 	
     -webkit-user-drag: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-	   
+	.user-select();
+	
 	font-size: 100%;
+	// stupid ie
     *font-size: 90%;
     *overflow: visible;
     text-decoration: none;
     -webkit-font-smoothing: antialiased;
 	
+	// stupid firefox
 	&::-moz-focus-inner {
 		padding: 0;
 		border: 0
