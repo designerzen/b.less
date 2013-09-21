@@ -235,6 +235,14 @@ As well as input from :
 // Square sizing (takes only one argument)
 .size(@size) {  .size(@size, @size);	}
 
+// Min-size
+.min-size(@size:100% ){
+	.min-size(@size,@size);
+}
+.min-size( @w:auto, @h:auto ){
+	min-width:@w;
+    min-height:@h;
+}
 // Responsive images
 .responsive(){	max-width: 100%; 	height: auto; }
 
@@ -285,13 +293,20 @@ As well as input from :
 .margins-tb( @margin:auto){	.margins-tb( @margin, @margin ); }
 // Margins Left & Right ONLY
 .margins-lr( @left:auto, @right:auto ){	margin-left:@left;	margin-right:@right; }
-.margins-lr( @margin:auto ){	.margins-lr( @margin ); }
+.margins-lr( @margin:auto ){	.margins-lr( @margin, @margin ); }
 
 .margin-baseline(){
     margin-bottom: 0px + @line-height;  // pixel fallback
     margin-bottom: 0rem + (@line-height / @font-size-browser-default);
 }
 
+.centralise-datum( @w; @h ){
+	margin-top: -(@h/2) ;
+	margin-top: -(@w/2) ;
+}
+.centralise-datum( @diameter ){
+	.centralise-datum( @diameter, @diameter ) ;
+}
 // ACCESSIBILITY ----------------------------------------------
 
 // Hide from both screenreaders and browsers: h5bp.com/u
@@ -312,6 +327,17 @@ As well as input from :
 .clearfix () { *zoom:1;&:before,&:after{content:" ";display:table;}&:after{clear:both;} }
 
 
+// COLOURS ===========================================================================
+.background(@color){
+	background-color:@color;
+}
+// a shortcut to a filter!
+// 3px 3px 0 0 rgba(0, 128, 0, 0.3)
+.glow( @xoffset:2px, @yoffset:2px, @blur:4px, @spread:4px, @colour:white ){
+	-webkit-box-shadow: @xoffset @yoffset @blur @spread @colour;
+    -moz-box-shadow: @xoffset @yoffset @blur @spread @colour;
+    box-shadow: @xoffset @yoffset @blur @spread @colour;
+}
 
 // GRID ==============================================================================
 /*
