@@ -93,16 +93,18 @@ As well as input from :
 
 
 // MONOSPACE ----------------------------------------------------------------------------------------------------------
-@font-family-default-monospace:   	Monaco, Menlo, Consolas, "Courier New", monospace;
+@font-family-default-monospace:   	Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+@font-family-monaco:   				Monaco, Menlo, Consolas, "Courier New", monospace;
 
 
 
 // Shortcuts for defining stacks, families and fallbacks
 // A nice way to use a stack as the fallback to your web font...
 .font-family( @family; @fallback ){
+	
 	// combine the two families together!
-	font-family: ~"@{family},@{fallback}";
-    //font-family: @family;
+	@concatinated : ~"@{family}, @{fallback}";
+	.font-family( @concatinated );
 }
 
 .font-family( @family ){	font-family:@family; }

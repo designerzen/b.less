@@ -1,0 +1,30 @@
+@import url(b.less);
+
+.normalize();
+
+body{
+	.setup-global-type();
+	// If you wish to specify a custom typeface :
+	//.font-family("Titillium Web");
+	// and if you wish to specify a fallback stack (in case that font isn't reachable)
+	.font-family('Titillium Web', ~'@font-family-default-sans-serif' );
+	.sans();
+	.background-size( 100% );
+}
+
+#typography #sans{
+	.sans{};
+}
+
+#typography #serif{
+	.serif{};
+}
+
+#typography #monospace{
+	.monospace{};
+}
+
+// main menu!
+#main-menu ul li a{
+	.button();
+}
