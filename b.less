@@ -523,13 +523,15 @@ body() {
 // .keyframes('.changeFontSize', another-name, another-from, another-to);
 
 .keyframes(@selector, @name, @from, @to) {
-    @newline: '"\n"'; // Newline
+	
+    @newline: "\n"; // Newline
+	/*
     .setVendor(@pre, @post, @vendor) {
         (~"@{pre}@@{vendor}keyframes @{name} {@{newline}from") {
-            .from(@from); 
+            from:@from; 
         }    
         to  { 
-            .to(@to);
+            to:@to;
         }
        .Local(){}
        .Local() when (@post=1) {
@@ -543,9 +545,11 @@ body() {
        }    
        .Local;
     } 
+	
     .setVendor(""            , 0,    "-moz-");
     .setVendor(~"}@{newline}", 0, "-webkit-");
     .setVendor(~"}@{newline}", 0,      "-o-");
     .setVendor(~"}@{newline}", 0,     "-ms-");
     .setVendor(~"}@{newline}", 1,         "");
+	*/
 }
