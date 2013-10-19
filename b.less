@@ -60,9 +60,7 @@ As well as input from :
 /* Helvetica/Arial-based sans serif stack */
 .Arial { font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; }
  
-/* Verdana-based sans serif stack */
-.Verdana { font-family: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif; }
- 
+
 /* Trebuchet-based sans serif stack */
 .Trebuchet { font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif; }
  
@@ -87,8 +85,9 @@ As well as input from :
 @font-family-segoe: 				Segoe, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 @font-family-tahoma: 				Tahoma, Geneva, Verdana, sans-serif;
 @font-family-trebuchet: 			"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
-@font-family-verdana: 				Verdana, Geneva, sans-serif;
-   
+@font-family-verdana: 				Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+.Verdana() { font-family:@font-family-verdana; }
+    
 // Cover all basis :
 // http://www.sitepoint.com/eight-definitive-font-stacks/
 @font-family-default-sans-serif:  	Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -117,7 +116,7 @@ As well as input from :
 
 // SLAB (heavy letters and bold faces) ----------------------------------------------------
 @font-family-impact: 				Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
-.Impact { font-family: @font-family-impact; }
+.Impact() { font-family: @font-family-impact; }
  
 
 
@@ -130,10 +129,8 @@ As well as input from :
 // Shortcuts for defining stacks, families and fallbacks
 // A nice way to use a stack as the fallback to your web font...
 .font-family( @family; @fallback ){
-	
-	// combine the two families together!
-	@concatinated : ~"@{family}, @{fallback}";
-	.font-family( @concatinated );
+	@concatinated : @family , @fallback;
+	font-family:@concatinated;
 }
 
 .font-family( @family ){	font-family:@family; }
@@ -448,6 +445,16 @@ body() {
 
 // Clip an image into a frame
 .background-clip( @clip:padding-box ) {  -moz-background-clip: @clip;  -webkit-background-clip: @clip;  background-clip: @clip; }
+
+// Add an alphatransparency value to any background or border color (via Elyse Holladay)
+.background-translucent(@color: @white, @alpha: 1) {
+    background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+}
+
+.border-translucent(@color: @white, @alpha: 1) {
+    border-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+    .background-clip(padding-box);
+}
 
 // Image replacement.
 .ir () {border: 0; overflow: hidden; background-color: transparent; *text-indent: -9999px; &:before {content: ""; display: block; width: 0; height: 100%;}}
