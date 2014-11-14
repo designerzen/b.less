@@ -1,28 +1,29 @@
-/* //////////////////////////////////////////////////////////////////
-
-A collection of useful mixins that are very useful when
-architecturing sites and creating complex layouts. 
-
-Simply add as a class mixin to your own selectors.
-
-Contains work from : 
-
-* html5BoilerPlate - 
-* 3L.Less 	- mateuszkocz.github.io/3l
-* Preboot 	- github.com/mdo/preboot
-* Normalize - 
-* Reset 	- 
-* Clearfix 	- 
-* Pure CSS 	- pure.io
-
-As well as input from : 
-* Denis Leblanc - denisleblanc.com/
-* - http://www.sitepoint.com/eight-definitive-font-stacks/
-* - http://blog.scur.pl/2012/06/variable-media-queries-less-css/
-* - Elyse Holladay
-
+// ////////////////////////////////////////////////////////////////
+//
+// A collection of useful mixins that are very useful when
+// architecturing sites and creating complex layouts. 
+// 
+// Simply add as a class mixin to your own selectors.
+// 
+// Contains work from : 
+// 
+// * html5BoilerPlate - 
+// * 3L.Less 	- mateuszkocz.github.io/3l
+// * Preboot 	- github.com/mdo/preboot
+// * Normalize - 
+// * Reset 	- 
+// * Clearfix 	- 
+// * Pure CSS 	- pure.io
+// 
+// As well as input from : 
+// * Denis Leblanc - denisleblanc.com/
+// * - http://www.sitepoint.com/eight-definitive-font-stacks/
+// * - http://blog.scur.pl/2012/06/variable-media-queries-less-css/
+// * - Elyse Holladay
+//
+// NB. This comment block will not show up in your compiled code 
+//
 ////////////////////////////////////////////////////////////////// */
-
 
 // RESET & NORMALISE ===========================================
 .normalize(){article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,video{display:inline-block}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}mark{background:#ff0;color:#000}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}pre{white-space:pre-wrap}q{quotes:"\201C" "\201D" "\2018" "\2019"}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}button,input{line-height:normal}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}}
@@ -51,8 +52,6 @@ As well as input from :
 
 
 // FONTS -------------------------------------------------------
-// Some of the fonts, like: Garamond, Baskerville and Didot are not as readable on screen as Georgia. 
-
 // Due to smaller x-height; Caslon, Didot, Garamond, Baskerville and Hoefler Text should be set 
 // at *minimum* of 14 pixels or above.
 // Lucida Grande, Futura and Tahoma are mechanically obliqued to fake an italic.
@@ -62,12 +61,6 @@ As well as input from :
 // For more info goto : http://www.awayback.com/revised-font-stack/
 
 // SANS SERIF (no curvy tails on letters) : ---------------------------------------------------------------------------
-
-/* Modern Georgia-based serif stack */
-.Georgia() { font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; }
- 
-/* Traditional Garamond-based serif stack */
-.Garamond (){ font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif; }
 
 // Sans-serif specific font-stacks
 @font-family-arial: 				Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -101,6 +94,14 @@ As well as input from :
 
 
 // SERIF (ligatures and accents in the newspaper stlye) : -------------------------------------------------------------
+
+// NB. Some of the fonts, like: Garamond, Baskerville and Didot are not as readable on screen as Georgia. 
+
+// Modern Georgia-based serif stack
+.Georgia() { font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; }
+ 
+// Traditional Garamond-based serif stack
+.Garamond (){ font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif; }
 
 // Serif specific font-stacks
 // Huge x-height!
@@ -138,8 +139,8 @@ As well as input from :
 // Shortcuts for defining stacks, families and fallbacks
 // A nice way to use a stack as the fallback to your web font...
 .font-family( @family; @fallback ){
-	@concatinated : @family , @fallback;
-	font-family:@concatinated;
+	@concatanated : @family , @fallback;
+	font-family:@concatanated;
 }
 
 .font-family( @family ){	font-family:@family; }
@@ -245,7 +246,7 @@ As well as input from :
 .user-select( @select:none ){ user-select:@select; }
 
 // Hyphenation : (extra) hyphen-ation 
-.hyphens( @mode: auto ) {	word-wrap: break-word; hyphens: @mode; 	}
+.hyphens( @mode:auto ) {	word-wrap: break-word; hyphens: @mode; 	}
 
 
 
@@ -402,8 +403,17 @@ As well as input from :
   &::-webkit-input-placeholder  { color: @color; } // Safari and Chrome
 }
 
+@base: #663333;
+@complement1: spin(@base, 180);
+@complement2: darken(spin(@base, 180), 5%);
+@lighten1: lighten(@base, 15%);
+@lighten2: lighten(@base, 30%);
 
-
+@base: #663333;
+@lighter1: lighten(spin(@base, 5), 10%);
+@lighter2: lighten(spin(@base, 10), 20%);
+@darker1: darken(spin(@base, -5), 10%);
+@darker2: darken(spin(@base, -10), 20%);
 // FILTERS ===========================================================================
 
 // a shortcut to a filter!
@@ -411,49 +421,9 @@ As well as input from :
 .glow( @xoffset:2px, @yoffset:2px, @blur:4px, @spread:4px, @colour:white ){
 	box-shadow: @xoffset @yoffset @blur @spread @colour;
 }
-
-// GRID ==============================================================================
-/*
-// Defaults which you can freely override
-@column-width: 60;
-@gutter-width: 20;
-@columns: 12;
-
-// Utility variable — you should never need to modify this
-@gridsystem-width: (@column-width*@columns) + (@gutter-width*@columns) * 1px;
-
-// Set @total-width to 100% for a fluid layout
-@total-width: @gridsystem-width;
-@total-width: 100%;
-
-body() {
-	width: 100%;
-	.clearfix;
+.reflect (@length: 50%, @opacity: 0.2){
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255,255,255,@opacity)));
 }
-
-.row( @columns:@columns ) {
-	display: block;
-	width: @total-width*((@gutter-width + @gridsystem-width)/@gridsystem-width);
-	margin: 0 @total-width*(((@gutter-width*.5)/@gridsystem-width)*-1);
-	// *width: @total-width*((@gutter-width + @gridsystem-width)/@gridsystem-width)-@correction;
-	// *margin: 0 @total-width*(((@gutter-width*.5)/@gridsystem-width)*-1)-@correction;
-	.clearfix;
-}
-.column( @x,@columns:@columns ) {
-	display: inline;
-	float: left;
-	width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width);
-	margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width);
-	// Prevent columns from collapsing when empty
-	min-height: 1px;
-	// *width: @total-width*((((@gutter-width+@column-width)*@x)-@gutter-width) / @gridsystem-width)-@correction;
-	// *margin: 0 @total-width*((@gutter-width*.5)/@gridsystem-width)-@correction;
-}
-
-.push( @offset:1 ) {  	margin-left: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
-.pull( @offset:1 ) {	margin-right: @total-width*(((@gutter-width+@column-width)*@offset) / @gridsystem-width) + @total-width*((@gutter-width*.5)/@gridsystem-width);}
-*/
-
 
 // IMAGES =======================================================
 
@@ -513,7 +483,7 @@ body() {
     cursor: pointer;
 	
     -webkit-user-drag: none;
-	.user-select();
+	user-select:none;
 	
 	font-size: 100%;
 	// stupid ie
@@ -545,6 +515,11 @@ body() {
 .disabled() {
     border: 0;
     cursor: not-allowed;
+}
+
+// Make any button, link or element refuse to accept mouse events
+.unusable(){
+	pointer-events : none;
 }
 
 // Animations :
