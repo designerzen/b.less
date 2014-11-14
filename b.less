@@ -1,4 +1,4 @@
-/*
+/* //////////////////////////////////////////////////////////////////
 
 A collection of useful mixins that are very useful when
 architecturing sites and creating complex layouts. 
@@ -17,12 +17,27 @@ Contains work from :
 
 As well as input from : 
 * Denis Leblanc - denisleblanc.com/
-* - www.sitepoint.com/eight-definitive-font-stacks/
-*/
+* - http://www.sitepoint.com/eight-definitive-font-stacks/
+* - http://blog.scur.pl/2012/06/variable-media-queries-less-css/
+* - Elyse Holladay
+
+////////////////////////////////////////////////////////////////// */
+
 
 // RESET & NORMALISE ===========================================
 .normalize(){article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}audio,canvas,video{display:inline-block}audio:not([controls]){display:none;height:0}[hidden]{display:none}html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}a:focus{outline:thin dotted}a:active,a:hover{outline:0}h1{font-size:2em;margin:.67em 0}abbr[title]{border-bottom:1px dotted}b,strong{font-weight:bold}dfn{font-style:italic}hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}mark{background:#ff0;color:#000}code,kbd,pre,samp{font-family:monospace,serif;font-size:1em}pre{white-space:pre-wrap}q{quotes:"\201C" "\201D" "\2018" "\2019"}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-0.5em}sub{bottom:-0.25em}img{border:0}svg:not(:root){overflow:hidden}figure{margin:0}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{border:0;padding:0}button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}button,input{line-height:normal}button,select{text-transform:none}button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}button[disabled],html input[disabled]{cursor:default}input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}textarea{overflow:auto;vertical-align:top}table{border-collapse:collapse;border-spacing:0}}
 .reset() {html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}table{border-collapse:collapse;border-spacing:0}}
+
+
+// BREAKPOINTS =================================================
+@highdensity: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
+              ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
+              ~"only screen and (-o-min-device-pixel-ratio: 3/2)",
+              ~"only screen and (min-device-pixel-ratio: 1.5)";
+@mobile:      ~"only screen and (max-width: 529px)";
+@tablet:      ~"only screen and (min-width: 530px) and (max-width: 949px)";
+@desktop:     ~"only screen and (min-width: 950px) and (max-width: 1128px)";
+@desktop-xl:  ~"only screen and (min-width: 1129px)";
 
 
 
@@ -48,26 +63,16 @@ As well as input from :
 
 // SANS SERIF (no curvy tails on letters) : ---------------------------------------------------------------------------
 
-/* Times New Roman-based stack */
-.Times { font-family: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif; }
- 
 /* Modern Georgia-based serif stack */
-.Georgia { font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; }
+.Georgia() { font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; }
  
 /* Traditional Garamond-based serif stack */
-.Garamond { font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif; }
- 
-/* Helvetica/Arial-based sans serif stack */
-.Arial { font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; }
- 
-
-/* Trebuchet-based sans serif stack */
-.Trebuchet { font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif; }
- 
- 
+.Garamond (){ font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif; }
 
 // Sans-serif specific font-stacks
 @font-family-arial: 				Arial, "Helvetica Neue", Helvetica, sans-serif;
+.Arial() { 			font-family: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+ 
 @font-family-arial-black: 			"Arial Black", "Arial Bold", Gadget, sans-serif;
 @font-family-arial-narrow: 			"Arial Narrow", Arial, sans-serif;
 @font-family-arial-rounded: 		"Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
@@ -85,8 +90,10 @@ As well as input from :
 @font-family-segoe: 				Segoe, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
 @font-family-tahoma: 				Tahoma, Geneva, Verdana, sans-serif;
 @font-family-trebuchet: 			"Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+.Trebuchet() { 		font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif; }
+ 
 @font-family-verdana: 				Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
-.Verdana() { font-family:@font-family-verdana; }
+.Verdana() { 		font-family:@font-family-verdana; }
     
 // Cover all basis :
 // http://www.sitepoint.com/eight-definitive-font-stacks/
@@ -110,13 +117,15 @@ As well as input from :
 @font-family-hoefler: 				"Hoefler Text", "Baskerville old face", Garamond, "Times New Roman", serif;
 @font-family-lucida-bright: 		"Lucida Bright", Georgia, serif;
 @font-family-palatino: 				Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua", Georgia, serif;
+@font-family-times: 				Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+.Times() { 			font-family: @font-family-times; }
 
 @font-family-default-serif:       	@font-family-georgia;
 
 
 // SLAB (heavy letters and bold faces) ----------------------------------------------------
 @font-family-impact: 				Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
-.Impact() { font-family: @font-family-impact; }
+.Impact() { 		font-family: @font-family-impact; }
  
 
 
@@ -159,14 +168,15 @@ As well as input from :
 
 // set-up the body font-size / line-height
 .setup-global-type( @line-height:@line-height) {
+	@relative-size: ( @line-height * 10000 / (@font-size-browser-default) );
     //margin-top: 0px + @line-height;
-	line-height: 0 + round(@line-height / @font-size-browser-default*10000) / 10000;
-	font-size: 0px + @font-size-browser-default;	
+	line-height:(  round( @relative-size ) / 10000 );
+	font-size:( 0px + @font-size-browser-default);	
 }
 
 // font-size : Just as Pixels
 .font-size-px ( @size:0 ) {
-    font-size: 0px + @size;
+    font-size:( 0px + @size );
 }
 
 // font-size : as REMs
@@ -174,7 +184,7 @@ As well as input from :
 // and therefore stay relative always to the root rather than their immediate parent
 .font-size-rem ( @size ) {
     .font-size-px( @size );     // pixel fallback
-	font-size: 0rem + @size / @font-size-browser-default;
+	font-size:( 0rem + @size / @font-size-browser-default );
 }
 
 // font-size : as EMs
@@ -182,15 +192,22 @@ As well as input from :
 // so it is wise to use EMs for h1,h2,h3,h4,h5,h6,p...
 .font-size-em ( @size ) {
     .font-size-px( @size );     // pixel fallback
-	font-size: 0em + @size / @font-size-browser-default;
+	font-size:( 0em + @size / @font-size-browser-default );
 }
 
 
 // TODO : See if @size > @line-height and if so force margins
 // font-size : just font-size and line-height
-.font-size ( @size ) {
-	.font-size-rem( @size );
-	line-height: 0 + round(@line-height / @size*10000) / 10000;
+.font-size ( @size ) when ( @size < @line-height) {
+	@relative-size: ( @line-height * 10000/ (@size ) );
+	.font-size-rem(@size);
+	line-height:( round(@relative-size) / 10000 );
+}
+.font-size ( @size)  when ( @size > @line-height) {
+	@lines-covered:2;
+	@relative-size: ( (@line-height * @lines-covered * 10000) / (@size) );
+	.font-size-rem(@size);
+	line-height:( round(@relative-size) / 10000 );
 }
 
 // font-size : sticking on vertical rhythm
@@ -201,7 +218,7 @@ As well as input from :
 // font-size : rythmic baseline respecting font-size
 .font-size ( @size; @emsOrRems ) {
     // TODO : Conditional REM or EMs
-    .font-size( @size );
+    .font-size(@size);
 	.margin-baseline();
 }
 
@@ -225,18 +242,10 @@ As well as input from :
 .text-truncate() {  overflow: hidden;  text-overflow: ellipsis;  white-space: nowrap;	}
 
 // User can select?
-.user-select( @select:none ){    -webkit-user-select:@select;    -moz-user-select:@select;    -ms-user-select:@select;    user-select:@select; }
+.user-select( @select:none ){ user-select:@select; }
 
 // Hyphenation : (extra) hyphen-ation 
-.hyphens( @mode: auto ) {
-  word-wrap: break-word;
-  -webkit-hyphens: @mode;
-     -moz-hyphens: @mode;
-      -ms-hyphens: @mode;
-       -o-hyphens: @mode;
-          hyphens: @mode;
-}
-
+.hyphens( @mode: auto ) {	word-wrap: break-word; hyphens: @mode; 	}
 
 
 
@@ -264,9 +273,20 @@ As well as input from :
 	max-width:@w;
     max-height:@h;
 }
+
+
+
 // Responsive images
 .responsive(){	max-width: 100%; 	height: auto; }
 
+// inine-block with IE fixes
+.inline-block(){
+	display: inline-block;
+	.ie7 & {
+		display: inline;
+		zoom: 1;
+	}
+}
 
 // POSITIONING --------------------------------------------------
 
@@ -277,7 +297,7 @@ As well as input from :
 .h( @height ){	height:@height }
 
 // Absolute positioning 
-.position( @top:auto; @left:auto; @bottom:auto; @right:auto )
+.position(  @top:auto; @right:auto; @bottom:auto; @left:auto )
 {
 	position:absolute;
 	top:@top;
@@ -293,8 +313,18 @@ As well as input from :
 
 
 // Position relative to the bottom and right of the parent container
+.position-tr( @top:auto; @right:auto ){	position:absolute;	top:@top;	right:@right; }
+.position-tr( @position:auto ){	.position-tr( @position, @position ); }
+
+
+// Position relative to the bottom and right of the parent container
 .position-br( @bottom:auto; @right:auto ){	position:absolute;	bottom:@bottom;	right:@right; }
 .position-br( @position:auto ){	.position-br( @position, @position ); }
+
+
+// Position relative to the bottom and right of the parent container
+.position-bl( @bottom:auto; @left:auto ){	position:absolute;	bottom:@bottom;	left:@left; }
+.position-bl( @position:auto ){	.position-br( @position, @position ); }
 
 // Center-align a block level element
 .centralize() {  display: block; .margins-lr( auto ); }
@@ -324,8 +354,8 @@ As well as input from :
 .margins-lr( @margin:auto ){	.margins-lr( @margin, @margin ); }
 
 .margin-baseline(){
-    margin-bottom: 0px + @line-height;  // pixel fallback
-    margin-bottom: 0rem + (@line-height / @font-size-browser-default);
+    margin-bottom:( 0px + @line-height);  // pixel fallback
+    margin-bottom:( 0rem + (@line-height / @font-size-browser-default) );
 }
 
 .centralise-datum( @w; @h ){
@@ -373,27 +403,13 @@ As well as input from :
 }
 
 
-// lots of shortcuts to create backgrounds!
-// colour / image / repetitions / position / scale
-.background(@color){
-	background-color:@color;
-}
 
-
-
-.background( @color; @image; @xposition; @yposition; @xrepotitions; @yrepositions; @xscale; @yscale ){
-	
-	.background-size ( @xscale, @yscale );
-}
-
-
+// FILTERS ===========================================================================
 
 // a shortcut to a filter!
 // 3px 3px 0 0 rgba(0, 128, 0, 0.3)
 .glow( @xoffset:2px, @yoffset:2px, @blur:4px, @spread:4px, @colour:white ){
-	-webkit-box-shadow: @xoffset @yoffset @blur @spread @colour;
-    -moz-box-shadow: @xoffset @yoffset @blur @spread @colour;
-    box-shadow: @xoffset @yoffset @blur @spread @colour;
+	box-shadow: @xoffset @yoffset @blur @spread @colour;
 }
 
 // GRID ==============================================================================
@@ -440,16 +456,28 @@ body() {
 
 
 // IMAGES =======================================================
-// Polyfiller for mozilla: use until redundant
-.background-size (...) {	-moz-background-size: @arguments;	background-size: @arguments; }
 
-// Clip an image into a frame
-.background-clip( @clip:padding-box ) {  -moz-background-clip: @clip;  -webkit-background-clip: @clip;  background-clip: @clip; }
+// TODO : 
+// lots of shortcuts to create backgrounds!
+// colour / image / repetitions / position / scale
+.background(@color){
+	background-color:@color;
+}
+
+.background( @color; @image; @xposition; @yposition; @xrepotitions; @yrepositions; @xscale; @yscale ){
+	.background-size ( @xscale, @yscale );
+}
 
 // Add an alphatransparency value to any background or border color (via Elyse Holladay)
 .background-translucent(@color: @white, @alpha: 1) {
     background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
 }
+
+// Polyfiller for mozilla: use until redundant
+.background-size (...) {	background-size: @arguments; }
+
+// Clip an image into a frame
+.background-clip( @clip:padding-box ) {  background-clip: @clip; }
 
 .border-translucent(@color: @white, @alpha: 1) {
     border-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
@@ -463,18 +491,13 @@ body() {
 
 // 3d
 .translateZ (@z) {
-	-webkit-transform: translateZ(@z);
-	-moz-transform: translateZ(@z);
-	-ms-transform: translateZ(@z);
 	transform: translateZ(@z);
 }
 
 .rotateY (@y:0){
-	-webkit-transform: rotateY(@y);
 	transform: rotateY(@y);
 }
 .rotateZ (@z:0){
-	-webkit-transform: rotateZ(@z);
 	transform: rotateZ(@z);
 }
 
@@ -525,10 +548,14 @@ body() {
 }
 
 // Animations :
+.transition(@transition1, @transition2:X, ...){
+	@transitions: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
+    transition: @transitions;
+}
+
 // http://stackoverflow.com/questions/11551313/less-css-pass-mixin-as-a-parameter-to-another-mixin
 // .keyframes('.changeColor', some-name, my-from, my-to);
 // .keyframes('.changeFontSize', another-name, another-from, another-to);
-
 .keyframes(@selector, @name, @from, @to) {
 	
     @newline: "\n"; // Newline
@@ -560,3 +587,10 @@ body() {
     .setVendor(~"}@{newline}", 1,         "");
 	*/
 }
+
+// DEBUG =======================================================
+
+.incomplete() {outline: 3px dotted green}
+.fixme() {outline: 3px dotted yellow}
+.todo() {outline: 3px dotted blue}
+.xxx() {outline: 1px dotted red}
