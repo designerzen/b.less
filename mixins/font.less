@@ -1,0 +1,35 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// FONTS ========================================================================================
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// FONT FAMILY -------------------------------------------------------------------------
+
+// Shortcuts for defining stacks, families and fallbacks
+// A nice way to use a stack as the fallback to your web font...
+.font-family( @family; @fallback ){
+	@concatanated : @family , @fallback;
+	font-family:@concatanated;
+}
+
+.font-family( @family ){	
+	font-family:@family; 
+}
+
+// NB. You can overide the @font-family-sans-serif with your
+// own stack if you want to use these as universal setters
+.font-family-sans( ){				.font-family( @font-family-default-sans-serif );	}
+.font-family-sans( @family ){		.font-family( @family, @font-family-default-sans-serif );	}
+.sans( @family ){					.font-family-sans( @family );	}
+.sans(){    				        .font-family-sans();	}
+
+.font-family-serif(){				.font-family( @font-family-default-serif ); }
+.font-family-serif( @family ){		.font-family( @family, @font-family-default-serif ); }
+.serif( @family ){     				.font-family-serif( @family  ); }
+.serif(){     			        	.font-family-serif(); }
+
+.font-family-monospace( ){			.font-family( @font-family-default-monospace ); }
+.font-family-monospace( @family ){	.font-family( @family, @font-family-default-monospace ); }
+.monospace ( @family ){				.font-family-monospace( @family ); }
+.monospace (){    			        .font-family-monospace( ); }

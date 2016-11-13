@@ -1,0 +1,143 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// TYPOGRAPHY ===================================================================================
+//
+// Golden Ratio Typography Generator for LESS
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// initial variables set-up
+@font-size-browser-default: 16;
+
+// You can override the line height (baseline)
+@line-height: 24;
+
+
+// PADDING ======================================================================================
+
+.type-padding-top(@value) {
+    padding-top: unit(@value, px);			// Pixel fallback
+    padding-top: unit(@value, rem);			// Rems
+}
+
+.type-padding-bottom(@value) {
+    padding-bottom: unit(@value, px);		// Pixel fallback
+    padding-bottom: unit(@value, rem);		// Rems
+}
+
+.type-padding(@val-top, @val-bottom) {
+    .type-padding-top(@val-top);
+    .type-padding-bottom(@val-bottom);
+}
+
+
+// MARGINS ======================================================================================
+
+.type-margin-top(@value) {
+    margin-top: unit(@value, px);			// Pixel fallback
+    margin-top: @value * 1rem / 10;
+}
+
+.type-margin-bottom(@value) {
+    margin-bottom: unit(@value, px);		// Pixel fallback
+    margin-bottom: @value * 1rem / 10;
+}
+
+.type-margin(@val-top, @val-bottom) {
+    .type-margin-top(@val-top);
+    .type-margin-bottom(@val-bottom);
+}
+
+// FONT SIZING -------------------------------------------------------------------------
+
+// Rythmic baseline
+.line_height (@size) {
+	line-height: unit( @body_line_height / (@font-size-browser-default + @size), em );
+}
+
+// Font Sizing with rythmic baseline
+.setup-global-type( @line-height:@line-height) {
+	@relative-size: ( @line-height / @font-size-browser-default );
+    // margin-top: 0px + @line-height;
+	line-height: round(@relative-size, 5);				// 5 decimal places
+	font-size: unit( @font-size-browser-default, px );		// pixel fallback
+}
+
+.font_size (@size) {
+	font-size: unit( (@font-size-browser-default + @size) / @font-size-browser-default, em );
+}
+
+// font-size : sticking on vertical rhythm
+// font-size : rythmic baseline respecting font-size
+.font-size ( @size; @emsOrRems ) {
+    .font-size(@size);
+}
+
+
+// TODO : See if @size > @line-height and if so force margins
+// font-size : just font-size and line-height
+.font-size ( @size ) when ( @size < @line-height) {
+	@relative-size: ( @line-height * 10000/ (@size ) );
+	.font-size-rem(@size);
+	line-height:( round(@relative-size) / 10000 );
+}
+
+.font-size ( @size)  when ( @size > @line-height) {
+	@lines-covered:2;
+	@relative-size: ( (@line-height * @lines-covered * 10000) / (@size) );
+	.font-size-rem(@size);
+	line-height:( round(@relative-size) / 10000 );
+}
+
+// font-size : Just as Pixels
+.font-size-px ( @size:0 ) {
+    font-size: unit( @size, px );
+}
+
+// font-size : as EMs
+// NB. You probably want to keep your headers and paragraphs cascading
+// so it is wise to use EMs for h1,h2,h3,h4,h5,h6,p...
+.font-size-em ( @size ) {
+    .font-size-px( @size );     // pixel fallback
+	font-size:unit( @size / @font-size-browser-default, em );
+}
+
+
+// font-size : as REMs
+// NB. REMS are just like EMS except that they do not nest cascading styles
+// and therefore stay relative always to the root rather than their
+// immediate parent - ideal for lists and paragraphs where you want a fixed size
+.font-size-rem ( @size ) {
+    .font-size-px( @size );     // pixel fallback
+	font-size:unit( @size / @font-size-browser-default, rem );
+}
+
+
+
+
+
+// https://www.smashingmagazine.com/2016/05/fluid-typography/
+// http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
+.fluid-type( @property; @min-vw; @max-vw; @min-size; @max-size; @fallback:16px )
+{
+	@{property}: @min-size;
+
+	@media screen and (min-width: @min-vw) {
+		@{property}: @fallback;
+		@{property}: calc( @min-size ~" + " unit(@max-size - @min-size) ~" * ((100vw - " @min-vw ~") /" unit(@max-vw - @min-vw) ~")" );
+	}
+
+	@media screen and (min-width: @max-vw) {
+		@{property}: @fallback;
+		@{property}: @max-size;
+	}
+
+}
+
+// http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
+.type-lock( @min-vw; @max-vw; @min-size; @max-size; @fallback:16px )
+{
+	.fluid-type(font-size, @min-vw,  @max-vw,  @min-size, @max-size, @fallback );
+	//.fluid-type(line-height, @min-vw,  @max-vw,  @min-size, @max-size, @fallback );
+}

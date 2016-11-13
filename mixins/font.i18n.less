@@ -1,0 +1,143 @@
+///////////////////////////////////////////////////////////////////////////////////
+// 
+// Multi-Language Pan-Asian Typefaces
+//
+// Information gleamed from "List of typefaces included with Microsoft Windows"
+// http://en.wikipedia.org/wiki/List_of_typefaces_included_with_Microsoft_Windows
+//
+// and
+// 
+// "List of CJK fonts"
+// http://en.wikipedia.org/wiki/List_of_CJK_fonts
+// 
+// Embedded Web-Fonts are usually very large, but here are some exceptions :
+// 
+// http://www.google.com/get/noto/#/family/noto-sans
+// http://www.google.com/get/noto/#/family/noto-sans-hans 
+// http://blog.typekit.com/2014/07/15/introducing-source-han-sans
+//
+///////////////////////////////////////////////////////////////////////////////////
+
+// Simplified Chinese (GB2312)
+// --------------------------------------------------------------------------------
+// Country Codes : HK / CH
+//
+// Windows: Microsoft YaHei / SimHei / SimSun
+//
+// NB. Mainland Chinese internet users are no longer able to connect to the Google Font API since the government blocked access to Google. 
+// Having a Google webfont on your Chinese website basically hangs the loading process for ages for users based in China as the site tries to render the font. 
+// Sometimes it works, mostly it fails.
+//
+// from http://www.kendraschaefer.com/2012/06/chinese-standard-web-fonts-the-ultimate-guide-to-css-font-family-declarations-for-web-design-in-simplified-chinese/
+//
+// There are a few fonts available from Google that are within our file limit
+// http://www.google.com/get/noto/#/family/noto-sans
+// http://blog.typekit.com/2014/07/15/introducing-source-han-sans/ and https://github.com/adobe-fonts/source-han-sans/
+// http://www.google.com/fonts/earlyaccess
+
+// Sans Serif
+@font-chinese-yahei 				: Tahoma, Arial, Helvetica, 'Microsoft YaHei New', 'Microsoft Yahei', '微软雅黑';
+@font-chinese-simsun 				: Arial, Helvetica, tahoma, verdana;
+@font-chinese-sans-fallback			: '宋体', SimSun, '华文细黑', STXihei, sans-serif;
+
+// Serif
+@font-chinese-fangsonf 				: Georgia, 'Times New Roman', 'FangSong', '仿宋', STFangSong;
+@font-chinese-kaiti 				: Georgia, 'Times New Roman', 'KaiTi', '楷体', STKaiti;
+@font-chinese-serif-fallback		: '华文楷体', serif;
+
+
+//
+// Traditional Chinese (Big5)
+// --------------------------------------------------------------------------------
+// Country Codes : HK / CH
+// 
+// Windows : Microsoft JhengHei / MingLiU
+//
+
+
+// TODO:
+
+//
+// Japanese
+// --------------------------------------------------------------------------------
+// Country Code : JP
+//
+// Windows : Meiryo / MS Gothic / MS Mincho
+//
+// See http://codepen.io/floral/pen/HfFrc
+//
+// Meiryo and Hiragino's order is, because Mac users may have Meiryo from MS-Office, and Hiragino is more familiar and matching well on Mac, better by starting Hiragino series.
+//
+// Windows :
+//
+// 'MS UI Gothic'
+// 'ＭＳ Ｐゴシック','MS PGothic'
+// 'ＭＳ ゴシック','MS Gothic'
+// 'ＭＳ Ｐ明朝','MS PMincho'
+// 'ＭＳ 明朝','MS Mincho'
+// 'メイリオ',Meiryo'
+//
+// Mac :
+//
+// 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro'
+// 'ヒラギノ角ゴ ProN W3','Hiragino Kaku Gothic ProN'
+// 'ヒラギノ角ゴ Pro W6','HiraKakuPro-W6'
+// 'ヒラギノ角ゴ ProN W6','HiraKakuProN-W6'
+// 'ヒラギノ角ゴ Std W8','Hiragino Kaku Gothic Std'
+// 'ヒラギノ角ゴ StdN W8','Hiragino Kaku Gothic StdN'
+// 'ヒラギノ丸ゴ Pro W4','Hiragino Maru Gothic Pro'
+// 'ヒラギノ丸ゴ ProN W4','Hiragino Maru Gothic ProN'
+// 'ヒラギノ明朝 Pro W3','Hiragino Mincho Pro'
+// 'ヒラギノ明朝 ProN W3','Hiragino Mincho ProN'
+// 'ヒラギノ明朝 Pro W6','HiraMinPro-W6'
+// 'ヒラギノ明朝 ProN W6','HiraMinProN-W6'
+// 'Osaka'
+// 'Osaka－等幅','Osaka-Mono'
+
+
+// Sans Serif
+@font-japanese-meiryo 				: 'メイリオ', Meiryo,  'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', Osaka;
+@font-japanese-hiragino-kaku		: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo;
+@font-japanese-osaka		 		: 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',Osaka, 'メイリオ', Meiryo;
+@font-japanese-sans-fallback 		: 'ＭＳ Ｐゴシック', 'MS PGothic', Verdana, Arial, sans-serif;
+
+// Serif
+@font-japanese-mincho 				: 'ヒラギノ明朝 Pro W6', 'Hiragino Mincho Pro';
+@font-japanese-serif-fallback		: 'HGS明朝E', 'ＭＳ Ｐ明朝', serif;
+
+//
+// Korean
+// --------------------------------------------------------------------------------
+// Country Code : KR
+//
+// Windows : Batang / Dotum / Gulim  / Malgun Gothic (no Hanja)
+//
+
+// Sans Serif
+@font-korean-dotum 					: Dotum, Malgun Gothic;
+@font-korean-sans-fallback 			: Gulim, sans-serif;
+
+//
+// Thai
+// --------------------------------------------------------------------------------
+// Country Codes : TH
+//
+// Windows: 
+// serif: Tahoma
+// sans-serif: Microsoft Sans Serif / Tahoma
+// monospace: Tahoma
+//
+// Linux:
+// serif: serif
+// sans-serif: sans-serif
+// monospace: monospace
+//
+// Mac OS X:
+// serif: Thonburi
+// sans-serif: Thonburi
+// monospace: Ayuthaya
+//
+
+// Sans Serif
+@font-thai-cordia 				: 'Cordia New', Thonburi, Ayuthaya, Tahoma;
+@font-thai-sans-fallback 		: 'Arial Unicode MS', sans-serif;

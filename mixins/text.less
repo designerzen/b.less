@@ -1,0 +1,29 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// TEXT UTILITIES ===============================================================================
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Make text invisible yet selectable (for accessibility)
+.text-hide() {
+	font-size: 0;
+	color: transparent;
+	text-shadow: none;
+	background-color: transparent;
+	border: 0;
+}
+
+// Truncate : trun...
+// Requires inline-block or block for proper styling
+// NB. Requires element to be block or inline-block level
+.truncate() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+// Hyphenation : (extra) hyphen-ation
+.hyphenate( @mode:auto ) {
+	word-wrap: break-word;
+	hyphens: @mode;
+}

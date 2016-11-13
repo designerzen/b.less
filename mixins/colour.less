@@ -1,0 +1,17 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// COLOURS ======================================================================================
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// COLOUR MIXIN 1: Selected text
+// When clicked and dragged over text, what colours should the rectangle and text be?
+.selection( @text-col ; @background-col ) {
+	&::-moz-selection {color: @text-col; background-color: @background-col;}
+	&::selection {color: @text-col; background-color: @background-col;}
+}
+
+// COLOUR MIXIN 2: Caret Colour (Box that blinks while entering text)
+.caret( @col ){
+	caret-color:@col;
+}

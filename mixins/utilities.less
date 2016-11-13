@@ -1,0 +1,85 @@
+///////////////////////////////////////////////////////////////////////////////////////////
+//
+// Clearfix
+//
+// Source: http://nicolasgallagher.com/micro-clearfix-hack/
+//
+// For modern browsers
+// 1. The space content is one way to avoid an Opera bug when the
+//    contenteditable attribute is included anywhere else in the document.
+//    Otherwise it causes space to appear at the top and bottom of elements
+//    that are clearfixed.
+// 2. The use of `table` rather than `block` is only necessary if using
+//    `:before` to contain the top-margins of child elements.
+//
+///////////////////////////////////////////////////////////////////////////////////////////
+.clearfix() {
+	*zoom:1;
+	&:before,
+	&:after {
+		content: " "; // 1
+		display: table; // 2
+	}
+	&:after {
+		clear: both;
+	}
+}
+
+.ir (){
+    background-color: transparent;
+    border: 0;
+    overflow: hidden;
+    *text-indent: -9999px;
+
+	&:before {
+		content: "";
+		display: block;
+		width: 0;
+		height: 150%;
+	}
+}
+
+.hidden (){
+    display: none !important;
+    visibility: hidden;
+}
+
+.visuallyhidden (){
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard
+.visuallyhidden-focusable() {
+	&:active,
+	&:focus{
+		clip: auto;
+		height: auto;
+		margin: 0;
+		overflow: visible;
+		position: static;
+		width: auto;
+	}
+}
+
+.invisible() {
+    visibility: hidden;
+}
+
+
+// Make any button, link or element refuse to accept mouse events
+.unusable(){
+	pointer-events : none;
+}
+
+// Prevent user interaction
+.disabled() {
+    border: 0;
+    cursor: not-allowed;
+}
