@@ -2,9 +2,9 @@
   "name": "b.less",
   "description": "A set of unique mixins and constants for use in CSS development",
   "homepage": "http://github.com/designerzen/b.less",
-  "version": "0.8.2",
+  "version": "0.8.4",
   "author": "@designerzen",
-  "license": "GPL2.0",
+  "license": "GPL2",
   "private": false,
   "engines": {},
   "repository": {
@@ -19,7 +19,8 @@
   ],
   "bugs": {},
   "devDependencies": {
-    "fs": "0.0.1-security"
+    "fs": "0.0.1-security",
+    "less": "^2.7.1"
   },
   "dependencies": {},
   "scripts": {
@@ -28,6 +29,7 @@
     "less": "type mixins\\*.less > b.less",
     "build": "node build\\less.js",
     "build-win": "type mixins\\*.less > b.less",
-    "build-mac": "cat mixins\\*.less > b.less"
+    "build-mac": "cat mixins\\*.less > b.less",
+	"examples": "lessc examples/example.less examples/example.css"
   }
 }
