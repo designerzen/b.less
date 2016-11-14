@@ -1,3 +1,10 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// COMMON UTILITIES =============================================================================
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
 // Clearfix
@@ -25,27 +32,11 @@
 	}
 }
 
-.ir (){
-    background-color: transparent;
+// Hide from the screen render but keep accessibile.
+// You should use this for descriptive instructions that you do not want to present
+.visuallyhidden() {
     border: 0;
-    overflow: hidden;
-    *text-indent: -9999px;
-
-	&:before {
-		content: "";
-		display: block;
-		width: 0;
-		height: 150%;
-	}
-}
-
-.hidden (){
-    display: none !important;
-    visibility: hidden;
-}
-
-.visuallyhidden (){
-    border: 0;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(0 0 0 0);
     height: 1px;
     margin: -1px;
@@ -55,25 +46,66 @@
     width: 1px;
 }
 
-// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard
-.visuallyhidden-focusable() {
-	&:active,
-	&:focus{
+// Extends the .visuallyhidden class to allow the element
+// to be focusable when navigated to via the keyboard:
+// https://www.drupal.org/node/897638
+.visuallyhidden-focusable()
+{
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+
+	&:active, &:focus
+	{
 		clip: auto;
-		height: auto;
-		margin: 0;
-		overflow: visible;
-		position: static;
 		width: auto;
+	    height: auto;
+	    margin: 0;
+	    overflow: visible;
+	    position: static;
 	}
 }
 
-.invisible() {
-    visibility: hidden;
+// If you want something hidden at one size but visable in abother
+.undo-visuallyhidden(){
+	//border
+	clip:auto;
+	height:auto;
+	width: auto;
+	margin:inherit;
+	overflow: visible;
+	padding: inherit;
+	position: static;
+
+	// &:active, &:focus
+	// {
+	//     margin: 0;
+	//     overflow: visible;
+	//     position: static;
+	// }
 }
 
+// Image replacement.
+.ir () {
+	border: 0;
+	overflow: hidden;
+	background-color: transparent;
+	*text-indent: -9999px;
+	&:before {
+		content: "";
+		display: block;
+		width: 0;
+		height: 100%;
+	}
+}
 
 // Make any button, link or element refuse to accept mouse events
+// CAUTION : Use sparingly as you may run into debugging issues!
 .unusable(){
 	pointer-events : none;
 }

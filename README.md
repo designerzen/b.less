@@ -36,5 +36,7 @@ Build :
 Credits :
 * Chirag Mehta for his work creating the colour name list [homepage](http://chir.ag/projects/name-that-color)
 * Font Stacks inspired by [AwayBack](http://www.awayback.com/revised-font-stack/)
-	
-http://www.cssfontstack.com/
+* Denis Leblanc - [denisleblanc.com](http://denisleblanc.com)
+* Elyse Holladay
+* Dave from [cssfontstack.com](http://www.cssfontstack.com/)
+* Robert Penner for his great ease equations

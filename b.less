@@ -1,5 +1,59 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //
+// ANIMATION HELPERS ============================================================================
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// These are based on Robert Penner's fantastic and widely used animation tween equations
+
+// Native easing options
+@ease: ease;
+@linear: linear;
+@ease-in: ease-in;
+@ease-out: ease-out;
+@ease-in-out: ease-in-out;
+
+// Classic Robert Penner Ease Equations
+// @ease : cubic-bezier(0.25, 1, 0.25, 1);
+@linear : cubic-bezier(0, 0, 1, 1);
+@ease-in : cubic-bezier(0.42, 0, 1, 1);
+@ease-out : cubic-bezier(0, 0, 0.58, 1);
+
+@ease-in-sine : cubic-bezier(0.47, 0, 0.745, 0.715);
+@ease-out-sine : cubic-bezier(0.39, 0.575, 0.565, 1);
+@ease-in-out-sine : cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+@ease-in-quad : cubic-bezier(0.55, 0.085, 0.68, 0.53);
+@ease-out-quad : cubic-bezier(0.25, 0.46, 0.45, 0.94);
+@ease-in-out-quad : cubic-bezier(0.455, 0.03, 0.515, 0.955);
+
+@ease-in-cubic : cubic-bezier(0.55, 0.055, 0.675, 0.19);
+@ease-out-cubic : cubic-bezier(0.215, 0.61, 0.355, 1);
+@ease-in-out-cubic : cubic-bezier(0.645, 0.045, 0.355, 1);
+
+@ease-in-quart : cubic-bezier(0.895, 0.03, 0.685, 0.22);
+@ease-out-quart : cubic-bezier(0.165, 0.84, 0.44, 1);
+@ease-in-out-quart : cubic-bezier(0.77, 0, 0.175, 1);
+
+@ease-in-quint : cubic-bezier(0.755, 0.05, 0.855, 0.06);
+@ease-out-quint : cubic-bezier(0.23, 1, 0.32, 1);
+
+@ease-in-expo : cubic-bezier(0.95, 0.05, 0.795, 0.035);
+@ease-out-expo : cubic-bezier(0.19, 1, 0.22, 1);
+@ease-in-out-expo : cubic-bezier(1, 0, 0, 1);
+
+@ease-in-circ : cubic-bezier(0.6, 0.04, 0.98, 0.335);
+@ease-out-circ : cubic-bezier(0.075, 0.82, 0.165, 1);
+@ease-in-out-circ : cubic-bezier(0.785, 0.135, 0.15, 0.86);
+
+@ease-in-back : cubic-bezier(0.6, -0.28, 0.735, 0.045);
+@ease-out-back : cubic-bezier(0.175, 0.885, 0.32, 1.275);
+@ease-in-out-back : cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+@ease-in-bounce: cubic-bezier(0.485, 0.155, 0.24, 1.245);
+@ease-out-bounce: cubic-bezier(0.485, 0.155, 0.515, 0.845);
+@ease-in-out-bounce: cubic-bezier(0.76, -0.245, 0.24, 1.245);/////////////////////////////////////////////////////////////////////////////////////////////////
+//
 // COLOURS ======================================================================================
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2046,6 +2100,43 @@
 	}
 }/////////////////////////////////////////////////////////////////////////////////////////////////
 //
+// SHAPES =======================================================================================
+//
+// These are really good used as pseduo elements 
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Triangle that points up
+.triangle-up( @size:5px; @colour:white )
+{
+	width: 0;
+	height: 0;
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-top: none;
+	border-bottom: @size solid @colour;
+}
+
+// Triangle that points down
+.triangle-down( @size:5px; @colour:white )
+{
+	width: 0;
+	height: 0;
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-bottom: none;
+	border-top: @size solid @colour;
+}
+
+.triangle-topleft( @size:5px; @colour:white )
+{
+	width: 0;
+	height: 0;
+	border-top: @size solid @colour;
+	border-right: @size solid transparent;
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
 // TEXT UTILITIES ===============================================================================
 //
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2215,6 +2306,13 @@
 	.fluid-type(font-size, @min-vw,  @max-vw,  @min-size, @max-size, @fallback );
 	//.fluid-type(line-height, @min-vw,  @max-vw,  @min-size, @max-size, @fallback );
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// COMMON UTILITIES =============================================================================
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 //
 // Clearfix
@@ -2242,27 +2340,11 @@
 	}
 }
 
-.ir (){
-    background-color: transparent;
+// Hide from the screen render but keep accessibile.
+// You should use this for descriptive instructions that you do not want to present
+.visuallyhidden() {
     border: 0;
-    overflow: hidden;
-    *text-indent: -9999px;
-
-	&:before {
-		content: "";
-		display: block;
-		width: 0;
-		height: 150%;
-	}
-}
-
-.hidden (){
-    display: none !important;
-    visibility: hidden;
-}
-
-.visuallyhidden (){
-    border: 0;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
     clip: rect(0 0 0 0);
     height: 1px;
     margin: -1px;
@@ -2272,25 +2354,66 @@
     width: 1px;
 }
 
-// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard
-.visuallyhidden-focusable() {
-	&:active,
-	&:focus{
+// Extends the .visuallyhidden class to allow the element
+// to be focusable when navigated to via the keyboard:
+// https://www.drupal.org/node/897638
+.visuallyhidden-focusable()
+{
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+
+	&:active, &:focus
+	{
 		clip: auto;
-		height: auto;
-		margin: 0;
-		overflow: visible;
-		position: static;
 		width: auto;
+	    height: auto;
+	    margin: 0;
+	    overflow: visible;
+	    position: static;
 	}
 }
 
-.invisible() {
-    visibility: hidden;
+// If you want something hidden at one size but visable in abother
+.undo-visuallyhidden(){
+	//border
+	clip:auto;
+	height:auto;
+	width: auto;
+	margin:inherit;
+	overflow: visible;
+	padding: inherit;
+	position: static;
+
+	// &:active, &:focus
+	// {
+	//     margin: 0;
+	//     overflow: visible;
+	//     position: static;
+	// }
 }
 
+// Image replacement.
+.ir () {
+	border: 0;
+	overflow: hidden;
+	background-color: transparent;
+	*text-indent: -9999px;
+	&:before {
+		content: "";
+		display: block;
+		width: 0;
+		height: 100%;
+	}
+}
 
 // Make any button, link or element refuse to accept mouse events
+// CAUTION : Use sparingly as you may run into debugging issues!
 .unusable(){
 	pointer-events : none;
 }

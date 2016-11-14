@@ -1,0 +1,33 @@
+{
+  "name": "b.less",
+  "description": "A set of unique mixins and constants for use in CSS development",
+  "homepage": "http://github.com/designerzen/b.less",
+  "version": "0.8.2",
+  "author": "@designerzen",
+  "license": "GPL2.0",
+  "private": false,
+  "engines": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/designerzen/b.less"
+  },
+  "keywords": [
+    "css",
+    "css3",
+    "less",
+    "native"
+  ],
+  "bugs": {},
+  "devDependencies": {
+    "fs": "0.0.1-security"
+  },
+  "dependencies": {},
+  "scripts": {
+    "start": "build\\palette.js",
+    "palette": "npm run build/palette.js",
+    "less": "type mixins\\*.less > b.less",
+    "build": "node build\\less.js",
+    "build-win": "type mixins\\*.less > b.less",
+    "build-mac": "cat mixins\\*.less > b.less"
+  }
+}

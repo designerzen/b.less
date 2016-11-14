@@ -1,0 +1,37 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//
+// SHAPES =======================================================================================
+//
+// These are really good used as pseduo elements 
+//
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Triangle that points up
+.triangle-up( @size:5px; @colour:white )
+{
+	width: 0;
+	height: 0;
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-top: none;
+	border-bottom: @size solid @colour;
+}
+
+// Triangle that points down
+.triangle-down( @size:5px; @colour:white )
+{
+	width: 0;
+	height: 0;
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-bottom: none;
+	border-top: @size solid @colour;
+}
+
+.triangle-topleft( @size:5px; @colour:white )
+{
+	width: 0;
+	height: 0;
+	border-top: @size solid @colour;
+	border-right: @size solid transparent;
+}
