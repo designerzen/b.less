@@ -1859,6 +1859,35 @@
 .font-family-monospace( @family ){	.font-family( @family, @font-family-default-monospace ); }
 .monospace ( @family ){				.font-family-monospace( @family ); }
 .monospace (){    			        .font-family-monospace( ); }
+
+
+// Font Face shortcuts
+
+.font-face( @family-name, @font-path, @font-weight:normal, @font-style:normal, @include-svg:false ) when not (@include-svg) {
+	@font-face {
+	    font-family: @family-name;
+	    src: url('@{font-path}.eot');
+	    src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),
+	         url('@{font-path}.woff') format('woff'),
+	         url('@{font-path}.ttf') format('truetype');
+	    font-weight: @font-weight;
+	    font-style: @font-style;
+	}
+}
+
+// For TypeKit fonts and certain buoght typefaces, they do not include SVG files, so use this one
+.font-face( @family-name, @font-path, @font-weight:normal, @font-style:normal, @include-svg:false ) when (@include-svg) {
+	@font-face {
+	    font-family: @family-name;
+	    src: url('@{font-path}.eot');
+	    src: url('@{font-path}.eot?#iefix') format('embedded-opentype'),
+	         url('@{font-path}.woff') format('woff'),
+	         url('@{font-path}.ttf') format('truetype'),
+			 url('@{font-path}.svg#@{family-name}') format('svg');
+	    font-weight: @font-weight;
+	    font-style: @font-style;
+	}
+}
 /////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // NATIVE OS SYSTEM FONTS =======================================================================
@@ -2163,6 +2192,15 @@
 .hyphenate( @mode:auto ) {
 	word-wrap: break-word;
 	hyphens: @mode;
+}
+
+.wrap-words() {
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
 }/////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // TYPOGRAPHY ===================================================================================
