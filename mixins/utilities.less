@@ -70,8 +70,8 @@
 	    position: static;
 	}
 }
-
-// If you want something hidden at one size but visable in abother
+// If you want something hidden at one size but visable in another...
+// You can "undo" the above mixin with ths one!
 .undo-visuallyhidden(){
 	//border
 	clip:auto;
@@ -81,13 +81,6 @@
 	overflow: visible;
 	padding: inherit;
 	position: static;
-
-	// &:active, &:focus
-	// {
-	//     margin: 0;
-	//     overflow: visible;
-	//     position: static;
-	// }
 }
 
 // Image replacement.
@@ -95,7 +88,7 @@
 	border: 0;
 	overflow: hidden;
 	background-color: transparent;
-	*text-indent: -9999px;
+	*text-indent: -9999px;	// ie kludge
 	&:before {
 		content: "";
 		display: block;
