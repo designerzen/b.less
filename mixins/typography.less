@@ -119,6 +119,7 @@
 
 // https://www.smashingmagazine.com/2016/05/fluid-typography/
 // http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
+// .fluid-type(font-size, 600px, 900px, 12px, 28px);
 .fluid-type( @property; @min-vw; @max-vw; @min-size; @max-size; @fallback:16px )
 {
 	@{property}: @min-size;
@@ -132,8 +133,8 @@
 		@{property}: @fallback;
 		@{property}: @max-size;
 	}
-
 }
+
 
 // http://blog.typekit.com/2016/08/17/flexible-typography-with-css-locks/
 .type-lock( @min-vw; @max-vw; @min-size; @max-size; @fallback:16px )
